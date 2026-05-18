@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "ng serve",
-    "build": "npx ng build",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.0.0",
-    "@angular/cli": "^20.0.0",
+    "@angular/cli": "^20.3.26",
     "@angular/compiler-cli": "^20.0.0",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.41",
