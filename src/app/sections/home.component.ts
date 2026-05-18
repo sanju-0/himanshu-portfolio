@@ -1,0 +1,43 @@
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
+import emailjs from '@emailjs/browser';
+import { Validator } from '@angular/forms';
+
+@Component({
+  imports: [JsonPipe, ReactiveFormsModule],
+  selector: 'app-home',
+  standalone: true,
+  templateUrl: '../sections.home.html',
+})
+export class HomeComponent{
+  emailForm: FormGroup = this.fb.group({
+    name: '',
+    email: '',
+    title: ''
+  });
+  constructor(private fb: FormBuilder) {
+  }
+
+  isSending = false;
+
+  submit() {
+    emailjs.init('vw__UXlbxt7KOsW2t');
+    const serviceID = 'service_xlben88';   
+    const templateID = 'template_g7fwp4r'; 
+
+    emailjs.send(serviceID, templateID, {
+      name: this.emailForm.value.name,
+      email: this.emailForm.value.email,
+      title: this.emailForm.value.title
+    }).then(() => {
+      this.isSending = false;
+      alert('✅ Email Sent Successfully!');
+      this.emailForm =  this.fb.group({name: '',email: '', title: ''});
+    }).catch((err) => {
+      this.isSending = false;
+      alert('❌ Failed to send: ' + JSON.stringify(err));
+    });
+  }
+}
